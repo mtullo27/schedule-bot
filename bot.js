@@ -188,8 +188,8 @@ cron.schedule("0 10 * * 0", () => {
     if (today === "Sunday") {
         // Find the coaches role in the guild
         const coachesRole = client.guilds.cache
-            .get("YOUR_GUILD_ID")
-            .roles.cache.find((role) => role.name === "coaches") // Adjust role name and replace YOUR_GUILD_ID
+            .get("1158138299152597062")
+            .roles.cache.find((role) => role.name.toLowerCase === "coaches")
 
         if (coachesRole) {
             const todayDate = now.format("MMMM Do")
