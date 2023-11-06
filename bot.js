@@ -180,6 +180,4 @@ client.on("messageCreate", (message) => {
     }
 })
 
-client.login(
-    "MTE3MTA5MTg2NzcwMjY2OTM3NQ.GXiH60.OfqtoaKMULBY8etv5d6VakJSKRo38ruq1jlHXk"
-)
+client.login("")
