@@ -1,19 +1,6 @@
 const Discord = require("discord.js")
 const client = new Discord.Client({
-    intents: [
-        /*
-            Intents 'GUILDS' is required
-            if you wish to receive (message) events
-            from guilds as well.
-
-            If you don't want that, do not add it.
-            Your bot will only receive events
-            from Direct Messages only.
-        */
-        "GUILDS",
-        "DIRECT_MESSAGES",
-        "GUILD_MESSAGES"
-    ],
+    intents: ["GUILDS", "DIRECT_MESSAGES", "GUILD_MESSAGES"],
     partials: ["MESSAGE", "CHANNEL"]
 })
 const prefix = "!" // You can change the prefix if needed
@@ -33,22 +20,48 @@ client.on("messageCreate", (message) => {
     if (command === "schedule") {
         console.log("schedule")
         if (args.length < 2) {
-            return message.channel.send(
-                "Please use the correct format: !schedule @user date/time (MM/DD HH:MM)"
-            )
+            if (message.author.id.toString === "139910247195213824") {
+                return message.channel.send("Use the command right you bozo")
+            } else if (message.author.id.toString === "174974574105067520") {
+                return message.channel.send(
+                    "Use the command right you greasy loafer"
+                )
+            } else {
+                return message.channel.send(
+                    "Please use the correct format: !schedule @user date/time (MM/DD HH:MM)"
+                )
+            }
         }
 
         const targetUser = message.mentions.users.first()
         const dateAndTime = args.slice(1).join(" ")
 
         if (!targetUser) {
-            return message.channel.send("Please mention a user to schedule.")
+            if (message.author.id.toString === "139910247195213824") {
+                return message.channel.send("Use the command right you bozo")
+            } else if (message.author.id.toString === "174974574105067520") {
+                return message.channel.send(
+                    "Use the command right you greasy loafer"
+                )
+            } else {
+                return message.channel.send(
+                    "Please mention a user to schedule."
+                )
+            }
         }
 
         if (!dateAndTime.match(/\d{1,2}\/\d{1,2} \d{1,2}:\d{2}/)) {
-            return message.channel.send(
-                "Please provide a valid date and time format (MM/DD HH:MM)"
-            )
+            if (message.author.id.toString === "139910247195213824") {
+                return message.channel.send("Use the command right you bozo")
+            } else if (message.author.id.toString === "174974574105067520") {
+                return message.channel.send(
+                    "Use the command right you greasy loafer"
+                )
+            } else {
+                return message.channel.send(
+                    "Please provide a valid date and time format (MM/DD HH:MM)"
+                )
+            }
         }
 
         const [month, day, time] = dateAndTime.split(/[\/ ]/)
@@ -74,24 +87,48 @@ client.on("messageCreate", (message) => {
     } else if (command === "updateschedule") {
         console.log("updateSchedule")
         if (args.length < 2) {
-            return message.channel.send(
-                "Please use the correct format: !updateschedule @user date/time (MM/DD HH:MM)"
-            )
+            if (message.author.id.toString === "139910247195213824") {
+                return message.channel.send("Use the command right you bozo")
+            } else if (message.author.id.toString === "174974574105067520") {
+                return message.channel.send(
+                    "Use the command right you greasy loafer"
+                )
+            } else {
+                return message.channel.send(
+                    "Please use the correct format: !updateschedule @user date/time (MM/DD HH:MM)"
+                )
+            }
         }
 
         const targetUser = message.mentions.users.first()
         const updatedDateTime = args.slice(1).join(" ")
 
         if (!targetUser) {
-            return message.channel.send(
-                "Please mention a user to update the schedule."
-            )
+            if (message.author.id.toString === "139910247195213824") {
+                return message.channel.send("Use the command right you bozo")
+            } else if (message.author.id.toString === "174974574105067520") {
+                return message.channel.send(
+                    "Use the command right you greasy loafer"
+                )
+            } else {
+                return message.channel.send(
+                    "Please mention a user to update the schedule."
+                )
+            }
         }
 
         if (!updatedDateTime.match(/\d{1,2}\/\d{1,2} \d{1,2}:\d{2}/)) {
-            return message.channel.send(
-                "Please provide a valid date and time format (MM/DD HH:MM)"
-            )
+            if (message.author.id.toString === "139910247195213824") {
+                return message.channel.send("Use the command right you bozo")
+            } else if (message.author.id.toString === "174974574105067520") {
+                return message.channel.send(
+                    "Use the command right you greasy loafer"
+                )
+            } else {
+                return message.channel.send(
+                    "Please provide a valid date and time format (MM/DD HH:MM)"
+                )
+            }
         }
 
         const [month, day, time] = updatedDateTime.split(/[\/ ]/)
@@ -129,7 +166,20 @@ client.on("messageCreate", (message) => {
             )
 
         message.channel.send({ embeds: [howToEmbed] })
+    } else {
+        if (message.author.id.toString === "139910247195213824") {
+            message.channel.send("Use the command right you bozo")
+        } else if (message.author.id.toString === "174974574105067520") {
+            message.channel.send("Use the command right you greasy loafer")
+        } else {
+            console.log(message.author.id.toString)
+            message.channel.send(
+                "Command not found. Type !howtoschedule for a list of commands."
+            )
+        }
     }
 })
 
-client.login("")
+client.login(
+    "MTE3MTA5MTg2NzcwMjY2OTM3NQ.GXiH60.OfqtoaKMULBY8etv5d6VakJSKRo38ruq1jlHXk"
+)
