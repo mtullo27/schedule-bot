@@ -1,4 +1,5 @@
 const Discord = require("discord.js")
+require("dotenv").config()
 const client = new Discord.Client({
     intents: ["GUILDS", "DIRECT_MESSAGES", "GUILD_MESSAGES"],
     partials: ["MESSAGE", "CHANNEL"]
@@ -176,4 +177,4 @@ client.on("messageCreate", (message) => {
     }
 })
 
-client.login("")
+client.login(process.env.DISCORD_TOKEN)

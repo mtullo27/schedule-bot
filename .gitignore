@@ -1,0 +1,21 @@
+# Node modules
+node_modules/
+
+# Environment variables
+.env
+
+# Log files
+*.log
+
+# Editor-specific files
+.vscode/
+.idea/
+
+# macOS specific files
+.DS_Store
+
+# npm debugging log
+npm-debug.log
+
+# OS generated files
+Thumbs.db
