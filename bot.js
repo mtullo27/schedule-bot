@@ -177,4 +177,44 @@ client.on("messageCreate", (message) => {
     }
 })
 
+// Timezone setup
+const timezone = "America/New_York" // EST timezone
+
+// Schedule a reminder for Sundays at 10 AM EST
+cron.schedule("0 10 * * 0", () => {
+    const now = moment().tz(timezone)
+    const today = now.format("dddd")
+
+    if (today === "Sunday") {
+        // Find the coaches role in the guild
+        const coachesRole = client.guilds.cache
+            .get("YOUR_GUILD_ID")
+            .roles.cache.find((role) => role.name === "coaches") // Adjust role name and replace YOUR_GUILD_ID
+
+        if (coachesRole) {
+            const todayDate = now.format("MMMM Do")
+            const reminderTime = now
+                .clone()
+                .hour(20)
+                .minute(0)
+                .format("h:mm A z")
+
+            // Send a reminder message to the coaches role
+            const scheduledChannel = client.guilds.cache
+                .get("YOUR_GUILD_ID")
+                .channels.cache.find(
+                    (channel) => channel.name === "scheduled-matches"
+                ) // Change to your desired channel name
+
+            if (scheduledChannel) {
+                scheduledChannel.send(
+                    `<@&${coachesRole.id}>: Reminder to have your matches for this week scheduled by tonight ${reminderTime}`
+                )
+            } else {
+                console.log("Could not find the scheduled matches channel.")
+            }
+        }
+    }
+})
+
 client.login(process.env.DISCORD_TOKEN)

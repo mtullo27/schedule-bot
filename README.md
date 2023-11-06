@@ -36,8 +36,14 @@ This Discord bot is designed to facilitate scheduling matches between users in a
 
 **Note:** When using the `!schedule` or `!updateSchedule` commands, ensure that the correct date and time format (MM/DD HH:MM) is provided, and the mentioned user is correctly formatted.
 
+## Coach Reminder
+
+The bot includes a scheduled task to send a reminder to coaches every Sunday at 10 AM EST. The reminder will be sent to the `scheduled-matches` channel, notifying the coaches to schedule matches for the week. This feature aims to facilitate the scheduling process for the coaches.
+
 ## Additional Notes
 
 -   The bot responds differently based on the Discord user's ID. Modify the ID checks to suit your specific user IDs and their respective responses.
 
 ---
+
+This is the README
