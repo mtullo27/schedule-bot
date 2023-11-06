@@ -176,6 +176,4 @@ client.on("messageCreate", (message) => {
     }
 })
 
-client.login(
-    "MTE3MTA5MTg2NzcwMjY2OTM3NQ.GIReoY.Q9mmO7ZM8yD1iPxxpocdlp_WfurRdnydn5C4Fk"
-)
+client.login("")
