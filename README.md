@@ -43,7 +43,3 @@ The bot includes a scheduled task to send a reminder to coaches every Sunday at 
 ## Additional Notes
 
 -   The bot responds differently based on the Discord user's ID. Modify the ID checks to suit your specific user IDs and their respective responses.
-
----
-
-This is the README
