@@ -10,15 +10,12 @@ client.once("ready", () => {
 })
 
 client.on("messageCreate", (message) => {
-    console.log(message.content)
     if (!message.content.startsWith(prefix)) return
 
     const args = message.content.slice(prefix.length).trim().split(/ +/)
     const command = args.shift().toLowerCase()
 
-    console.log(command)
     if (command === "schedule") {
-        console.log("schedule")
         if (args.length < 2) {
             if (message.author.id.toString === "139910247195213824") {
                 return message.channel.send("Use the command right you bozo")
@@ -85,7 +82,6 @@ client.on("messageCreate", (message) => {
             `${message.author} vs ${targetUser} is scheduled for ${dayOfWeek}, ${month}/${day} at ${time}`
         )
     } else if (command === "updateschedule") {
-        console.log("updateSchedule")
         if (args.length < 2) {
             if (message.author.id.toString === "139910247195213824") {
                 return message.channel.send("Use the command right you bozo")
@@ -180,4 +176,6 @@ client.on("messageCreate", (message) => {
     }
 })
 
-client.login("")
+client.login(
+    "MTE3MTA5MTg2NzcwMjY2OTM3NQ.GIReoY.Q9mmO7ZM8yD1iPxxpocdlp_WfurRdnydn5C4Fk"
+)
