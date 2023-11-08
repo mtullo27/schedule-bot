@@ -16,20 +16,60 @@ client.on("messageCreate", (message) => {
     const args = message.content.slice(prefix.length).trim().split(/ +/)
     const command = args.shift().toLowerCase()
 
+    console.log(message.author.id)
+
     if (command === "schedule") {
         if (args.length < 2) {
-            return message.channel.send(
-                "Please use the correct format: !schedule @user date [time (HH:MM)]"
-            )
+            if (message.author.id.toString === "139910247195213824") {
+                return message.channel.send("Use the command right you bozo")
+            } else if (message.author.id.toString === "174974574105067520") {
+                return message.channel.send(
+                    "Use the command right you greasy loafer"
+                )
+            } else {
+                return message.channel.send(
+                    "Please use the correct format: !schedule @user date/time (MM/DD HH:MM)"
+                )
+            }
         }
 
         const targetUser = message.mentions.users.first()
-        const date = args[1]
-        const time = args.length > 2 ? args.slice(2).join(" ") : null
+        const dateAndTime = args.slice(1).join(" ")
 
         if (!targetUser) {
-            return message.channel.send("Please mention a user to schedule.")
+            if (message.author.id.toString === "139910247195213824") {
+                return message.channel.send("Use the command right you bozo")
+            } else if (message.author.id.toString === "174974574105067520") {
+                return message.channel.send(
+                    "Use the command right you greasy loafer"
+                )
+            } else {
+                return message.channel.send(
+                    "Please mention a user to schedule."
+                )
+            }
         }
+
+        if (!dateAndTime.match(/\d{1,2}\/\d{1,2} \d{1,2}:\d{2}/)) {
+            if (message.author.id.toString === "139910247195213824") {
+                return message.channel.send("Use the command right you bozo")
+            } else if (message.author.id.toString === "174974574105067520") {
+                return message.channel.send(
+                    "Use the command right you greasy loafer"
+                )
+            } else {
+                return message.channel.send(
+                    "Please provide a valid date and time format (MM/DD HH:MM)"
+                )
+            }
+        }
+
+        const [month, day, time] = dateAndTime.split(/[\/ ]/)
+        const year = new Date().getFullYear() // Get the current year
+        const fullDate = `${year}-${month}-${day} ${time}`
+        const dayOfWeek = new Date(fullDate).toLocaleString("en-US", {
+            weekday: "long"
+        })
 
         const scheduledChannel = message.guild.channels.cache.find(
             (channel) => channel.name === "scheduled-matches"
@@ -41,36 +81,61 @@ client.on("messageCreate", (message) => {
             )
         }
 
-        const dayOfWeek = new Date(
-            new Date().getFullYear(),
-            date.split("/")[0] - 1,
-            date.split("/")[1]
-        ).toLocaleString("en-US", {
-            weekday: "long"
-        })
-
-        let scheduledMessage = `${message.author} vs ${targetUser} is scheduled for ${dayOfWeek}, ${date}`
-        if (time) {
-            scheduledMessage += ` at ${time}`
-        }
-
-        scheduledChannel.send(scheduledMessage)
+        scheduledChannel.send(
+            `${message.author} vs ${targetUser} is scheduled for ${dayOfWeek}, ${month}/${day} at ${time}`
+        )
     } else if (command === "updateschedule") {
         if (args.length < 2) {
-            return message.channel.send(
-                "Please use the correct format: !updateschedule @user date [time (HH:MM)]"
-            )
+            if (message.author.id.toString === "139910247195213824") {
+                return message.channel.send("Use the command right you bozo")
+            } else if (message.author.id.toString === "174974574105067520") {
+                return message.channel.send(
+                    "Use the command right you greasy loafer"
+                )
+            } else {
+                return message.channel.send(
+                    "Please use the correct format: !updateschedule @user date/time (MM/DD HH:MM)"
+                )
+            }
         }
 
         const targetUser = message.mentions.users.first()
-        const date = args[1]
-        const time = args.length > 2 ? args.slice(2).join(" ") : null
+        const updatedDateTime = args.slice(1).join(" ")
 
         if (!targetUser) {
-            return message.channel.send(
-                "Please mention a user to update the schedule."
-            )
+            if (message.author.id.toString === "139910247195213824") {
+                return message.channel.send("Use the command right you bozo")
+            } else if (message.author.id.toString === "174974574105067520") {
+                return message.channel.send(
+                    "Use the command right you greasy loafer"
+                )
+            } else {
+                return message.channel.send(
+                    "Please mention a user to update the schedule."
+                )
+            }
         }
+
+        if (!updatedDateTime.match(/\d{1,2}\/\d{1,2} \d{1,2}:\d{2}/)) {
+            if (message.author.id.toString === "139910247195213824") {
+                return message.channel.send("Use the command right you bozo")
+            } else if (message.author.id.toString === "174974574105067520") {
+                return message.channel.send(
+                    "Use the command right you greasy loafer"
+                )
+            } else {
+                return message.channel.send(
+                    "Please provide a valid date and time format (MM/DD HH:MM)"
+                )
+            }
+        }
+
+        const [month, day, time] = updatedDateTime.split(/[\/ ]/)
+        const year = new Date().getFullYear() // Get the current year
+        const fullDate = `${year}-${month}-${day} ${time}`
+        const dayOfWeek = new Date(fullDate).toLocaleString("en-US", {
+            weekday: "long"
+        })
 
         const scheduledChannel = message.guild.channels.cache.find(
             (channel) => channel.name === "scheduled-matches"
@@ -82,20 +147,9 @@ client.on("messageCreate", (message) => {
             )
         }
 
-        const dayOfWeek = new Date(
-            new Date().getFullYear(),
-            date.split("/")[0] - 1,
-            date.split("/")[1]
-        ).toLocaleString("en-US", {
-            weekday: "long"
-        })
-
-        let updatedMessage = `${message.author} vs ${targetUser} has been updated to ${dayOfWeek}, ${date}`
-        if (time) {
-            updatedMessage += ` at ${time}`
-        }
-
-        scheduledChannel.send(updatedMessage)
+        scheduledChannel.send(
+            `${message.author} vs ${targetUser} has been updated to ${dayOfWeek}, ${month}/${day} at ${time}`
+        )
     } else if (command === "howtoschedule") {
         const howToEmbed = new Discord.MessageEmbed()
             .setColor("#0099ff")
@@ -112,22 +166,32 @@ client.on("messageCreate", (message) => {
 
         message.channel.send({ embeds: [howToEmbed] })
     } else if (command === "forceschedule") {
+        if (message.author.id.toString() !== "264842666682875914") {
+            return message.channel.send(
+                "You do not have permission to use this command."
+            )
+        }
         if (args.length < 3) {
             return message.channel.send(
-                "Please use the correct format: !forceschedule @user1 @user2 date [time (HH:MM)]"
+                "Please use the correct format: !forceSchedule @user1 @user2 date/time (MM/DD HH:MM)"
             )
         }
 
-        const user1 = message.mentions.users.first()
-        const user2 = message.mentions.users.last()
-        const date = args[args.length - 2]
-        const time = args.length > 4 ? args[args.length - 1] : null
+        const [targetUser1, targetUser2, dateAndTime] = args
+        const updatedDateTime = args.slice(2).join(" ")
 
-        if (!user1 || !user2) {
+        if (!updatedDateTime.match(/\d{1,2}\/\d{1,2} \d{1,2}:\d{2}/)) {
             return message.channel.send(
-                "Please mention two users to schedule a match."
+                "Please provide a valid date and time format (MM/DD HH:MM)"
             )
         }
+
+        const [month, day, time] = updatedDateTime.split(/[\/ ]/)
+        const year = new Date().getFullYear() // Get the current year
+        const fullDate = `${year}-${month}-${day} ${time}`
+        const dayOfWeek = new Date(fullDate).toLocaleString("en-US", {
+            weekday: "long"
+        })
 
         const scheduledChannel = message.guild.channels.cache.find(
             (channel) => channel.name === "scheduled-matches"
@@ -139,71 +203,9 @@ client.on("messageCreate", (message) => {
             )
         }
 
-        const dayOfWeek = new Date(
-            new Date().getFullYear(),
-            date.split("/")[0] - 1,
-            date.split("/")[1]
-        ).toLocaleString("en-US", {
-            weekday: "long"
-        })
-
-        let scheduledMessage = `${user1} vs ${user2} has been scheduled for ${dayOfWeek}, ${date}`
-        if (time) {
-            scheduledMessage += ` at ${time}`
-        }
-
-        scheduledChannel.send(scheduledMessage)
-    } else {
-        if (message.author.id.toString === "139910247195213824") {
-            message.channel.send("Use the command right you bozo")
-        } else if (message.author.id.toString === "174974574105067520") {
-            message.channel.send("Use the command right you greasy loafer")
-        } else {
-            console.log(message.author.id.toString)
-            message.channel.send(
-                "Command not found. Type !howtoschedule for a list of commands."
-            )
-        }
-    }
-})
-
-// Timezone setup
-const timezone = "America/New_York" // EST timezone
-
-// Schedule a reminder for Sundays at 10 AM EST
-cron.schedule("0 10 * * 0", () => {
-    const now = moment().tz(timezone)
-    const today = now.format("dddd")
-
-    if (today === "Sunday") {
-        // Find the coaches role in the guild
-        const coachesRole = client.guilds.cache
-            .get("1158138299152597062")
-            .roles.cache.find((role) => role.name.toLowerCase === "coaches")
-
-        if (coachesRole) {
-            const todayDate = now.format("MMMM Do")
-            const reminderTime = now
-                .clone()
-                .hour(20)
-                .minute(0)
-                .format("h:mm A z")
-
-            // Send a reminder message to the coaches role
-            const scheduledChannel = client.guilds.cache
-                .get("YOUR_GUILD_ID")
-                .channels.cache.find(
-                    (channel) => channel.name === "scheduled-matches"
-                ) // Change to your desired channel name
-
-            if (scheduledChannel) {
-                scheduledChannel.send(
-                    `<@&${coachesRole.id}>: Reminder to have your matches for this week scheduled by tonight ${reminderTime}`
-                )
-            } else {
-                console.log("Could not find the scheduled matches channel.")
-            }
-        }
+        scheduledChannel.send(
+            `${targetUser1} vs ${targetUser2} is scheduled for ${dayOfWeek}, ${month}/${day} at ${time}`
+        )
     }
 })
 
